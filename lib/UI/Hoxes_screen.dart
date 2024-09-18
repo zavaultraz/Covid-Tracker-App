@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart'; // Impor package url_launcher
-import '../Service/api_service.dart';
-import '../model/Hoax.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../Service/api_service.dart';
+import '../model/Hoax.dart';  // Import model Hoax
 
-class HoxesScreen extends StatefulWidget {
-  const HoxesScreen({super.key});
+class HoaxesScreen extends StatefulWidget {
+  const HoaxesScreen({super.key});
 
   @override
-  State<HoxesScreen> createState() => _HoxesScreenState();
+  State<HoaxesScreen> createState() => _HoaxesScreenState();
 }
 
-class _HoxesScreenState extends State<HoxesScreen> {
+class _HoaxesScreenState extends State<HoaxesScreen> {
   late Future<List<Hoax>?> hoaxFuture;
+  final List<String> categories = ['All', 'Politics', 'Health', 'Education', 'Technology'];
+  String selectedCategory = 'All';
+
+  final List<Map<String, String>> dummyData = [
+    {'author': 'BALIK 19', 'category': 'Health', 'avatar': 'assets/images/balik.png'},
+    {'author': 'MEDILUV', 'category': 'News', 'avatar': 'assets/images/luv.png'},
+    {'author': 'CNN', 'category': 'Tech', 'avatar': 'assets/images/cnn.png'},
+  ];
 
   @override
   void initState() {
     super.initState();
-    hoaxFuture = ApiService().getHoaxes();
+    hoaxFuture = ApiService().getHoaxes();  // Ganti dengan metode untuk mendapatkan hoaxes
   }
 
   Future<void> _launchURL(String url) async {
@@ -31,73 +40,182 @@ class _HoxesScreenState extends State<HoxesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Hoaxes News', style: TextStyle(color: Colors.white, fontSize: 30)),
-        backgroundColor: Colors.green[800], // Warna sesuai dengan tema
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        titleSpacing: 1,
+        title: const Text(
+          "Hoaxes",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: false,
       ),
-      body: FutureBuilder<List<Hoax>?>(
-        future: hoaxFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No hoaxes found.'));
-          }
-
-          final hoaxes = snapshot.data!;
-          return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: hoaxes.length,
-            itemBuilder: (context, index) {
-              final hoax = hoaxes[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 8.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    if (hoax.url != null && hoax.url!.isNotEmpty) {
-                      _launchURL(hoax.url!);
-                    }
-                  },
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.all(16.0),
-                    leading: Icon(
-                      Icons.close_sharp,
-                      color: Colors.red[600], // Ikon X warna merah
-                      size: 40,
-                    ),
-                    title: Text(
-                      hoax.title.toString(),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Hoaxes from various sources",
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      hintText: "Search",
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide.none,
                       ),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 8),
-                        Text(
-                          'Published on ${DateFormat('yyyy-MM-dd').format(
-                            DateTime.fromMillisecondsSinceEpoch(hoax.timestamp!),
-                          )}',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ),
-              );
-            },
-          );
-        },
+                const SizedBox(width: 8),
+                IconButton(
+                  icon: const Icon(Icons.filter_list),
+                  onPressed: () {
+                    // Handle filter logic here
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            height: 40,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ChoiceChip(
+                    label: Text(categories[index]),
+                    selectedColor: Colors.green,
+                    checkmarkColor: Colors.white,
+                    selected: selectedCategory == categories[index],
+                    onSelected: (bool selected) {
+                      setState(() {
+                        selectedCategory = categories[index];
+                      });
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: FutureBuilder<List<Hoax>?>(
+              future: hoaxFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No hoaxes found.'));
+                }
+
+                final hoaxes = snapshot.data!;
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  itemCount: hoaxes.length,
+                  itemBuilder: (context, index) {
+                    final hoaxItem = hoaxes[index];
+                    final dummyItem = dummyData[index % dummyData.length]; // Use dummy data cyclically
+
+                    return InkWell(
+                      onTap: () {
+                        _launchURL(hoaxItem.url!); // Open URL in the browser
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Avatar
+                            CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(dummyItem['avatar']!),
+                            ),
+                            const SizedBox(width: 16),
+                            // Hoax content
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    dummyItem['category']!,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    hoaxItem.title!,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        dummyItem['author']!,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        DateFormat('MMM dd, yyyy').format(
+                                          DateTime.fromMillisecondsSinceEpoch(hoaxItem.timestamp!),
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(height: 24),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

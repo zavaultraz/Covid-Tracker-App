@@ -1,7 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:covid_tracker/UI/Handwash.dart';
+import 'package:covid_tracker/UI/chat.dart';
+import 'package:covid_tracker/UI/news_home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../component/side_bar.dart';
+import 'Hospital_detail.dart';
 import 'Hoxes_screen.dart';
 import 'Hospital_screen.dart';
 import 'News_screen.dart';
@@ -32,6 +37,7 @@ class _CovidTrackerAppState extends State<CovidTrackerApp> {
       title: 'COVID Tracker',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.green),
       ),
       home: HomePage(),
     );
@@ -61,31 +67,35 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        titleSpacing: -5,
         backgroundColor: Colors.green[800],
-        elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Covid Tracker',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.white),
-            ),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage('assets/images/jon.png'),
-                ),
-                SizedBox(width: 10),
-                Icon(FontAwesomeIcons.solidBell, color: Colors.white)
-              ],
-            ),
-          ],
+        title: Text(
+          'Covid Tracker',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white,
+          ),
         ),
+        actions: [
+          Row(
+            mainAxisSize: MainAxisSize.min, // To avoid extra space
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage('assets/images/jon.png'),
+              ),
+              SizedBox(width: 13),
+              Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: Icon(FontAwesomeIcons.solidBell, color: Colors.white),
+              ),
+            ],
+          ),
+        ],
       ),
+      drawer: const SidebarMenu(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -94,7 +104,7 @@ class HomePage extends StatelessWidget {
             children: [
               // Carousel Slider
 
-              SizedBox(height: 24),
+
               // Profile and Title
               Container(
                 padding: const EdgeInsets.all(16.0),
@@ -172,7 +182,11 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // Implement navigation or action here
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatScreen()),
+                        );
                       },
                       child: Container(
                         height: 120,
@@ -214,7 +228,11 @@ class HomePage extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // Implement navigation or action here
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HandWashScreen()),
+                        );
                       },
                       child: Container(
                         height: 120,
@@ -229,13 +247,13 @@ class HomePage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(FontAwesomeIcons.earthAsia,
+                                Icon(FontAwesomeIcons.handsWash,
                                     color: Colors.blue, size: 60),
                               ],
                             ),
                             Spacer(),
                             Text(
-                              'Check Covid Data',
+                              'Hand Wash Helper',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                               textAlign: TextAlign.center,
@@ -266,7 +284,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HoxesScreen()),
+                              builder: (context) => const HoaxesScreen()),
                         );
                       },
                     ),
@@ -280,7 +298,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HospitalScreen()),
+                              builder: (context) => HospitalScreen()),
                         );
                       },
                     ),

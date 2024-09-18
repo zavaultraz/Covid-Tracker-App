@@ -11,6 +11,7 @@ class HospitalDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           hospital.name ?? 'Hospital Details',
           style: const TextStyle(color: Colors.white),
@@ -31,6 +32,7 @@ class HospitalDetailScreen extends StatelessWidget {
                   color: Colors.green[800],
                 ),
               ),
+
               const SizedBox(height: 16),
               Center(
                 child: Text(

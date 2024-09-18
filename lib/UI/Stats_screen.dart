@@ -26,6 +26,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text('Covid 19 Stats',style: TextStyle(color: Colors.white,fontSize: 30),),
         backgroundColor: Colors.green[800], // Warna sesuai dengan tema
       ),

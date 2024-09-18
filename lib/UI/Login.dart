@@ -1,7 +1,6 @@
 import 'package:covid_tracker/UI/home.dart';
 import 'package:flutter/material.dart';
 
-import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
