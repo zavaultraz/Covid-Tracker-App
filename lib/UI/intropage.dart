@@ -7,6 +7,7 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 246, 255, 243),
         body: Padding(
@@ -41,7 +42,26 @@ class IntroPage extends StatelessWidget {
               ),
 
               // Main tagline
-             
+              Text(
+                'Track all About Covid 19 Now',
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.green,
+                  height: 1.2,
+                ),
+              ),
+
+              // Description text
+              Text(
+                'Platform terkait covid 19 terlengkap di indonesia',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                  height: 1.8,
+                ),
+              ),
+              const SizedBox(height: 20,),
               // Call to action button
               Mybutton(
                 text: 'Get Started',

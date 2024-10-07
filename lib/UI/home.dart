@@ -35,6 +35,7 @@ class _CovidTrackerAppState extends State<CovidTrackerApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'COVID Tracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         iconTheme: IconThemeData(color: Colors.green),
