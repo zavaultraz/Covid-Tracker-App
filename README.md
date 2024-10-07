@@ -25,33 +25,30 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
 1. Clone repositori ini:
    ```bash
    git clone [Link Repo]
-Masuk ke direktori proyek:
 
-bash
-Salin kode
-cd covid_tracker
-Jalankan perintah berikut untuk menginstal semua dependensi:
+2. Masuk ke direktori proyek:
+    ```bash
+    cd covid_tracker
 
-bash
-Salin kode
-flutter pub get
-Untuk menjalankan aplikasi, gunakan:
+3. Jalankan perintah berikut untuk menginstal semua dependensi:
+  ```bash
+    flutter pub get
 
-bash
-Salin kode
-flutter run
-Kontribusi 🤝
+4. Untuk menjalankan aplikasi, gunakan:
+    ```bash
+    flutter run
+
+
+### Kontribusi 🤝
 Kami sangat menghargai kontribusi dari komunitas! Jika Anda ingin berkontribusi, silakan lakukan langkah berikut:
+- **Fork repositori ini**.
+- **Buat branch fitur baru (git checkout -b feature-nama-fitur)**.
+- **Commit perubahan Anda (git commit -m 'Menambahkan fitur baru')**.
+- **Push ke branch Anda (git push origin feature-nama-fitur)**.
+- **Buat Pull Request**.
 
-Fork repositori ini.
-Buat branch fitur baru (git checkout -b feature-nama-fitur).
-Commit perubahan Anda (git commit -m 'Menambahkan fitur baru').
-Push ke branch Anda (git push origin feature-nama-fitur).
-Buat Pull Request.
-Kontak 📧
+### Kontak 📧
 Jika Anda memiliki pertanyaan atau ingin berkolaborasi, silakan hubungi saya di zavazaneta@gmail.com.
 
-Lisensi
-Proyek ini dilisensikan di bawah [Nama Lisensi].
 
 Mari bersama-sama menjaga kesehatan dan memberikan informasi yang akurat kepada masyarakat! 🌟
