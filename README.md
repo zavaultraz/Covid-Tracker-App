@@ -1,6 +1,3 @@
-Berikut adalah README yang telah diperbaiki dengan format yang konsisten dan jelas:
-
-```markdown
 # COVID Tracker 🌍🦠
 
 COVID Tracker adalah aplikasi yang dirancang untuk memberikan informasi terkini tentang COVID-19, membantu pengguna menjaga kesehatan dan keselamatan mereka. Aplikasi ini dibangun menggunakan Flutter dan menawarkan berbagai fitur bermanfaat untuk masyarakat. 🚀✨
