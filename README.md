@@ -1,8 +1,11 @@
+Berikut adalah README yang telah diperbaiki dengan format yang konsisten dan jelas:
+
+```markdown
 # COVID Tracker 🌍🦠
 
 COVID Tracker adalah aplikasi yang dirancang untuk memberikan informasi terkini tentang COVID-19, membantu pengguna menjaga kesehatan dan keselamatan mereka. Aplikasi ini dibangun menggunakan Flutter dan menawarkan berbagai fitur bermanfaat untuk masyarakat. 🚀✨
 
-![Screenshot Aplikasi](assets/images/preview.png)  <!-- Ganti dengan path gambar yang sesuai -->
+![Screenshot Aplikasi](assets/images/preview.png)
 
 ## Fitur
 
@@ -25,30 +28,34 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
 1. Clone repositori ini:
    ```bash
    git clone [Link Repo]
+   ```
 
 2. Masuk ke direktori proyek:
-    ```bash
-    cd covid_tracker
+   ```bash
+   cd covid_tracker
+   ```
 
 3. Jalankan perintah berikut untuk menginstal semua dependensi:
-  ```bash
-    flutter pub get
+   ```bash
+   flutter pub get
+   ```
 
 4. Untuk menjalankan aplikasi, gunakan:
-    ```bash
-    flutter run
+   ```bash
+   flutter run
+   ```
 
+## Kontribusi 🤝
 
-### Kontribusi 🤝
 Kami sangat menghargai kontribusi dari komunitas! Jika Anda ingin berkontribusi, silakan lakukan langkah berikut:
-- **Fork repositori ini**.
-- **Buat branch fitur baru (git checkout -b feature-nama-fitur)**.
-- **Commit perubahan Anda (git commit -m 'Menambahkan fitur baru')**.
-- **Push ke branch Anda (git push origin feature-nama-fitur)**.
-- **Buat Pull Request**.
+- **Fork repositori ini.**
+- **Buat branch fitur baru**: `git checkout -b feature-nama-fitur`.
+- **Commit perubahan Anda**: `git commit -m 'Menambahkan fitur baru'`.
+- **Push ke branch Anda**: `git push origin feature-nama-fitur`.
+- **Buat Pull Request.**
 
-### Kontak 📧
-Jika Anda memiliki pertanyaan atau ingin berkolaborasi, silakan hubungi saya di zavazaneta@gmail.com.
+## Kontak 📧
 
+Jika Anda memiliki pertanyaan atau ingin berkolaborasi, silakan hubungi saya di [zavazaneta@gmail.com](mailto:zavazaneta@gmail.com).
 
 Mari bersama-sama menjaga kesehatan dan memberikan informasi yang akurat kepada masyarakat! 🌟
